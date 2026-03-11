@@ -1,0 +1,63 @@
+/* General styling */
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #efefef;
+}
+
+[data-mantine-color-scheme="dark"] body {
+  background-color: #e7e7e7;
+}
+
+[data-mantine-color-scheme="dark"] .mantine-RichTextEditor-content {
+  background: #1f2937;
+}
+
+:is(
+    .mantine-Select-option[data-checked],
+    .mantine-MultiSelect-option[data-checked]
+  )
+  svg {
+  color: var(--mantine-primary-color-filled);
+}
+
+/* Background pattern */
+.pattern-bg::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: url("src/assets/bg.svg");
+  background-position: right;
+  background-repeat: no-repeat;
+  opacity: 0.125;
+  z-index: -1;
+}
+
+/* Loader  */
+.loader {
+  --dimensions: 4rem;
+  width: var(--dimensions);
+  animation: rotate 3s infinite linear;
+}
+.loader--sm {
+  --dimensions: 2.5rem;
+}
+.loader--lg {
+  --dimensions: 6rem;
+}
+.loader--centered {
+  margin-inline: auto;
+}
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
