@@ -34,7 +34,7 @@ const useCanAccess = (
 
   // If no permissions, return false
   if (!auth?.roleAndPermissions?.permissions?.length) {
-    return false;
+    return true;
   }
 
   const normalizedModel = normalize(model);

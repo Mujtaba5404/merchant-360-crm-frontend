@@ -14,15 +14,17 @@ interface DashboardSidebarLinkProps {
   sidebarCollapsed?: boolean;
 }
 
-// Indicator wrapper
-const IndicatorWrapper: React.FC<{ enabled: boolean; children: ReactNode }> = ({ enabled, children }) => {
-  if (!enabled) return <>{children}</>;
-  return (
+const IndicatorWrapper: React.FC<{ enabled: boolean; children: ReactNode }> = ({
+  enabled,
+  children,
+}) =>
+  enabled ? (
     <Indicator size={10} offset={2} processing withBorder>
       {children}
     </Indicator>
+  ) : (
+    <>{children}</>
   );
-};
 
 const DashboardSidebarLink: React.FC<DashboardSidebarLinkProps> = ({
   link,
@@ -36,13 +38,18 @@ const DashboardSidebarLink: React.FC<DashboardSidebarLinkProps> = ({
   if (sidebarCollapsed) {
     return (
       <IndicatorWrapper enabled={indicatorCount > 0}>
-        <Tooltip label={link.title} tt="capitalize" position="right" withArrow>
+        <Tooltip label={link.title} position="right" withArrow>
           <ActionIcon
             h={36}
             size="lg"
             variant={variant}
             component={Link}
             to={link.path}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
             {link.icon}
           </ActionIcon>
@@ -54,24 +61,19 @@ const DashboardSidebarLink: React.FC<DashboardSidebarLinkProps> = ({
   return (
     <Button
       variant={variant}
-      tt="capitalize"
       justify="flex-start"
-      px={4}
-      leftSection={link.icon}
+      px={12}
+      py={6}
+      leftSection={<span>{link.icon}</span>}
       rightSection={
         indicatorCount > 0 && (
-          <Badge
-            w={24}
-            circle
-            color={variant === "filled" ? "white" : undefined}
-          >
+          <Badge w={24} circle color={isActive ? "white" : "orange"}>
             {indicatorCount > 9 ? "9+" : indicatorCount}
           </Badge>
         )
       }
       component={Link}
       to={link.path}
-      styles={{ label: { flex: 1 } }}
     >
       {link.title}
     </Button>

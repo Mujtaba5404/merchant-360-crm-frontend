@@ -1,18 +1,16 @@
 import React from "react";
-import { ActionIcon, Group, Text } from "@mantine/core";
+import { ActionIcon, Avatar, Group, Text } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
 import {
   IconLayoutSidebarLeftCollapse,
   IconLayoutSidebarLeftExpand,
 } from "@tabler/icons-react";
 
-// Props interface
 interface DashboardTopbarProps {
   sidebarCollapsed?: boolean;
   handleSidebarCollapse?: () => void;
 }
 
-// Auth type
 interface Auth {
   name?: string;
   [key: string]: any;
@@ -29,10 +27,8 @@ const DashboardTopbar: React.FC<DashboardTopbarProps> = ({
 
   return (
     <Group h="100%" justify="flex-end">
-      
       {/* <Logo h={36} /> */}
 
-      {/* Sidebar toggle button */}
       <ActionIcon
         title="Toggle sidebar"
         variant="light"
@@ -51,6 +47,17 @@ const DashboardTopbar: React.FC<DashboardTopbarProps> = ({
       <Text tt="capitalize" visibleFrom="sm">
         👋 Hi, {auth?.name || "User"}!
       </Text>
+
+      {/* Avatar */}
+      <Avatar
+        size="md"
+        radius="sm"
+        src={
+          auth?.avatarUrl ||
+          "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png"
+        }
+        alt={auth?.name || "User"}
+      />
     </Group>
   );
 };

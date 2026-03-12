@@ -2,7 +2,6 @@ import React, { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import useCanAccess from "../hooks/useCanAccess";
 
-// Props interface
 interface CanAccessProps {
   modelName?: string;
   action?: string;
@@ -20,9 +19,7 @@ const CanAccess: React.FC<CanAccessProps> = ({
 }) => {
   const hasAccess = useCanAccess(modelName, action);
 
-  if (hasAccess) {
-    return <>{children}</>;
-  }
+  if (hasAccess) return <>{children}</>;
 
   return redirect ? <Navigate to={redirectPath || -1} replace /> : null;
 };
