@@ -24,9 +24,9 @@ interface DashboardSidebarProps {
 
 const links: SidebarLink[] = [
   {
-    title: "merchants",
-    path: "/leads",
-    resource: "lead",
+    title: "Merchants",
+    path: "/merchant",
+    resource: "merchant",
     icon: <IconTargetArrow size={20} />,
   },
   {

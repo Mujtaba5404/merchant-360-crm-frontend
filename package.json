@@ -12,6 +12,7 @@
   "dependencies": {
     "@mantine/core": "^8.3.16",
     "@mantine/hooks": "^8.3.16",
+    "@mantine/modals": "^8.3.16",
     "@tabler/icons-react": "^3.40.0",
     "jwt-decode": "^4.0.0",
     "lodash": "^4.17.23",

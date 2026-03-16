@@ -1,0 +1,203 @@
+.payment-card {
+  position: relative;
+  height: 230px;
+  width: 380px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.payment-card:hover {
+  transform: translateY(-6px);
+}
+
+/* STRIPE */
+
+.stripe-card {
+  background: #1e2148;
+}
+
+.stripe-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background: linear-gradient(120deg, #8aa0ff, #6d7dff);
+  clip-path: polygon(0 0, 100% 0, 100% 40%, 0 75%);
+}
+
+.stripe-logo {
+  position: absolute;
+  top: 10px;
+  left: 28px;
+  color: white;
+  font-weight: 700;
+  font-size: 28px;
+}
+
+/* AUTHORIZE.NET */
+
+.authorize-card {
+  background: #273655;
+}
+
+/* big blue circle */
+
+.auth-big-circle {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  background: #4c7cff;
+  border-radius: 50%;
+  top: -40px;
+  left: -40px;
+}
+
+/* small yellow circle */
+
+.auth-small-circle {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  background: #ffc107;
+  border-radius: 50%;
+  bottom: 50px;
+  right: 40px;
+}
+
+/* authorize logo */
+
+.authorize-logo {
+  position: absolute;
+  top: 20px;
+  left: 28px;
+  width: 130px;
+  filter: brightness(0) invert(1);
+}
+
+/* CHIP */
+
+.chip {
+  position: absolute;
+  top: 75px;
+  left: 42px;
+}
+
+/* CARD NUMBER */
+
+.card-number {
+  position: absolute;
+  bottom: 80px;
+  left: 40px;
+  color: white;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  font-family: "Courier New", monospace;
+}
+
+/* bottom */
+
+.card-bottom {
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+  color: white;
+}
+
+.card-name {
+  font-size: 15px;
+  text-transform: uppercase;
+}
+
+.card-exp {
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+/* Add these styles for the Brain Tree card */
+.braintree-card {
+  background: #202020; /* Dark background */
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.braintree-color-bar {
+  position: absolute;
+  height: 8px;
+  width: 100%;
+  z-index: 1;
+}
+
+.braintree-color-bar.bar-1 {
+  top: 0;
+  background: #5071f7; /* Blue */
+}
+
+.braintree-color-bar.bar-4 {
+  bottom: 0;
+  background: #5071f7; /* Blue again for symmetry */
+}
+
+.braintree-table {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.15;
+  overflow: hidden;
+  font-size: 8px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.braintree-table table {
+  width: 100%;
+  border-collapse: collapse;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.braintree-table td {
+  padding: 2px 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.braintree-logo-image {
+  position: absolute;
+  left: 20px;
+  width: 120px; /* Adjust size as needed */
+  height: auto;
+  z-index: 3;
+  filter: brightness(0) invert(1); /* Makes logo white */
+  opacity: 0.9;
+}
+
+.card-number-full {
+  position: absolute;
+  bottom: 80px;
+  left: 25px;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  font-family: "Courier New", monospace;
+  color: white; /* White text */
+  z-index: 3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.cardholder-name {
+  position: absolute;
+  bottom: 55px;
+  left: 30px;
+  font-size: 16px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: white; /* White text */
+  z-index: 3;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}

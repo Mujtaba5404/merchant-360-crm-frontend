@@ -5,6 +5,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/Dashboard";
 import Users from "./pages/User";
 import Roles from "./pages/Role";
+import MerchantScreen from "./pages/MerchantScreen";
 
 const App: React.FC = () => {
   return (
@@ -24,6 +25,11 @@ const App: React.FC = () => {
           <Route path="role">
             <Route index element={<Roles />} />
             <Route path="role" element={<Roles />} />
+          </Route>
+
+          <Route path="merchant">
+            <Route index element={<MerchantScreen />} />
+            <Route path="merchant" element={<MerchantScreen />} />
           </Route>
         </Route>
       </Route>
