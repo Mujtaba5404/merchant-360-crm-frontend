@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Container, SimpleGrid } from "@mantine/core";
-import RealStylePaymentCard from "../components/PaymentCard";
+import { SimpleGrid } from "@mantine/core";
+import React from "react";
+import PaymentCard from "../components/PaymentCard";
 
 const paymentMethods = [
   {
@@ -18,34 +18,12 @@ const paymentMethods = [
 ];
 
 const MerchantScreen: React.FC = () => {
-  const [selected, setSelected] = useState<string | null>(null);
-
   return (
-    <Container size="xl" py="xl">
-      <SimpleGrid
-        cols={3}
-        spacing="xl"
-        breakpoints={[
-          { maxWidth: 1200, cols: 2, spacing: "md" },
-          { maxWidth: 768, cols: 1, spacing: "sm" },
-        ]}
-      >
-        {paymentMethods.map((method) => (
-          <RealStylePaymentCard
-            key={method.id}
-            method={method}
-            onSelect={(id) => setSelected(id)}
-            selected={selected === method.id}
-          />
-        ))}
-      </SimpleGrid>
-
-      {selected && (
-        <p style={{ marginTop: 30, textAlign: "center", fontWeight: 600 }}>
-          You selected: {selected}
-        </p>
-      )}
-    </Container>
+    <SimpleGrid cols={{ md: 3, lg: 4, xl: 5 }}>
+      {paymentMethods.map((card) => (
+        <PaymentCard key={card.id} card={card} />
+      ))}
+    </SimpleGrid>
   );
 };
 

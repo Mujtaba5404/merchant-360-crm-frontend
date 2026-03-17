@@ -2,6 +2,7 @@ import React, { ReactNode } from "react";
 import { ActionIcon, Badge, Button, Indicator, Tooltip } from "@mantine/core";
 import { Link, useLocation } from "react-router-dom";
 
+
 interface SidebarLink {
   title: string;
   path: string;

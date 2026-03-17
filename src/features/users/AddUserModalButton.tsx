@@ -1,24 +1,17 @@
-import React from "react";
 import { useDisclosure } from "@mantine/hooks";
 import AddButton from "../../components/AddButton";
 import CanAccess from "../../components/CanAccess";
-import AddUserModal from "./AdduserModal";
+import AddUserModal from "./AddUserModal";
+import React from "react";
 
 const AddUserModalButton: React.FC = () => {
-  const [
-    addUserModalOpened,
-    { open: openAddUserModal, close: closeAddUserModal },
-  ] = useDisclosure(false);
+  const [addUserModalOpened, { open: openAddUserModal, close: closeAddUserModal }] = useDisclosure(false);
 
   return (
     <CanAccess modelName="user" action="post">
       <AddUserModal isOpen={addUserModalOpened} onClose={closeAddUserModal} />
 
-      <AddButton
-        title="create user"
-        subtitle="add a new user"
-        onClick={openAddUserModal}
-      />
+      <AddButton title="Create User" subtitle="Add a new user" onClick={openAddUserModal} />
     </CanAccess>
   );
 };

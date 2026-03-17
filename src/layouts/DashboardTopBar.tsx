@@ -1,63 +1,49 @@
 import React from "react";
-import { ActionIcon, Avatar, Group, Text } from "@mantine/core";
+import { Avatar, Group, Text, Button } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
-import {
-  IconLayoutSidebarLeftCollapse,
-  IconLayoutSidebarLeftExpand,
-} from "@tabler/icons-react";
-
-interface DashboardTopbarProps {
-  sidebarCollapsed?: boolean;
-  handleSidebarCollapse?: () => void;
-}
+import { Link, useLocation } from "react-router-dom";
+import { navigationLinks } from "../config/navigationLinks";
+import UserMenu from "../components/UserMenu";
 
 interface Auth {
   name?: string;
-  [key: string]: any;
+  avatarUrl?: string;
 }
 
-const DashboardTopbar: React.FC<DashboardTopbarProps> = ({
-  sidebarCollapsed = false,
-  handleSidebarCollapse = () => {},
-}) => {
+const DashboardTopbar: React.FC = () => {
+  const { pathname } = useLocation();
+
   const [auth] = useLocalStorage<Auth | null>({
     key: "auth",
     getInitialValueInEffect: false,
   });
 
   return (
-    <Group h="100%" justify="flex-end">
-      {/* <Logo h={36} /> */}
-
-      <ActionIcon
-        title="Toggle sidebar"
-        variant="light"
-        size="lg"
-        onClick={handleSidebarCollapse}
-        mr="auto"
-      >
-        {sidebarCollapsed ? (
-          <IconLayoutSidebarLeftExpand />
-        ) : (
-          <IconLayoutSidebarLeftCollapse />
-        )}
-      </ActionIcon>
-
-      {/* Greeting text */}
-      <Text tt="capitalize" visibleFrom="sm">
-        👋 Hi, {auth?.name || "User"}!
+    <Group h="100%" justify="space-between" px="md">
+      {/* Logo */}
+      <Text fw={700} size="lg">
+        LOGO
       </Text>
 
-      {/* Avatar */}
-      <Avatar
-        size="md"
-        radius="sm"
-        src={
-          auth?.avatarUrl ||
-          "https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png"
-        }
-        alt={auth?.name || "User"}
-      />
+      {/* Center Navigation */}
+      <Group gap="md">
+        {navigationLinks.map((link, index) => {
+          const isActive = pathname.startsWith(link.path);
+          return (
+            <Button
+              key={index}
+              component={Link}
+              to={link.path}
+              color="orange"
+              variant={isActive ? "filled" : "subtle"}
+              radius={"xl"}
+            >
+              {link.title}
+            </Button>
+          );
+        })}
+      </Group>
+      <UserMenu />
     </Group>
   );
 };

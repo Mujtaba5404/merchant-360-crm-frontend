@@ -6,11 +6,13 @@ import React from "react";
 interface AddButtonProps extends React.ComponentProps<typeof Button> {
   title?: string;
   subtitle?: string;
+  onClick?: () => void;
 }
 
 const AddButton: React.FC<AddButtonProps> = ({
   title = "",
   subtitle = "",
+  onClick = () => {},
   ...props
 }) => {
   return (

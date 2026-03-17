@@ -1,94 +1,69 @@
 .payment-card {
   position: relative;
-  height: 230px;
-  width: 380px;
-  border-radius: 16px;
+  /* aspect-ratio: 1.75; */
   overflow: hidden;
-  cursor: pointer;
-  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
+  /* height: 230px;
+  width: 380px; */
+  /* border-radius: 1rem; */
+  /* cursor: pointer; */
+  /* box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2); */
+  /* transition: transform 0.3s ease; */
 }
 
-.payment-card:hover {
+/* .payment-card:hover {
   transform: translateY(-6px);
-}
+} */
 
 /* STRIPE */
-
 .stripe-card {
-  background: #1e2148;
+  background: linear-gradient(172deg, #6f80ff 35%, #1a1d42 30%);
 }
-
-.stripe-top {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 120px;
-  background: linear-gradient(120deg, #8aa0ff, #6d7dff);
-  clip-path: polygon(0 0, 100% 0, 100% 40%, 0 75%);
-}
-
-.stripe-logo {
-  position: absolute;
-  top: 10px;
-  left: 28px;
-  color: white;
-  font-weight: 700;
-  font-size: 28px;
-}
-
-/* AUTHORIZE.NET */
-
-.authorize-card {
-  background: #273655;
-}
-
-/* big blue circle */
-
-.auth-big-circle {
-  position: absolute;
-  width: 160px;
-  height: 160px;
-  background: #4c7cff;
-  border-radius: 50%;
-  top: -40px;
-  left: -40px;
-}
-
-/* small yellow circle */
-
-.auth-small-circle {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  background: #ffc107;
-  border-radius: 50%;
-  bottom: 50px;
-  right: 40px;
-}
-
-/* authorize logo */
-
-.authorize-logo {
-  position: absolute;
-  top: 20px;
-  left: 28px;
-  width: 130px;
-  filter: brightness(0) invert(1);
-}
-
-/* CHIP */
 
 .chip {
   position: absolute;
-  top: 75px;
-  left: 42px;
+  top: 60px;
+  left: 40px;
+  z-index: 1;
+}
+
+/* AUTHORIZE.NET */
+.authorize-logo {
+  width: 130px;
+  filter: brightness(0) invert(1);
+}
+.authorize-card {
+  --circle-size: 08rem;
+  position: relative;
+  isolation: isolate;
+  background: #273655;
+}
+.authorize-card::before {
+  content: "";
+  width: var(--circle-size);
+  height: var(--circle-size);
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  background: #4c7cff;
+  border-radius: 100vmax;
+  z-index: -1;
+}
+.authorize-card::after {
+  --scale: 0.425;
+  content: "";
+  width: calc(var(--circle-size) * var(--scale));
+  height: calc(var(--circle-size) * var(--scale));
+  position: absolute;
+  bottom: 30%;
+  right: 10%;
+  background: #ffc107;
+  border-radius: 100vmax;
+  z-index: -1;
 }
 
 /* CARD NUMBER */
 
-.card-number {
+/* .card-number {
   position: absolute;
   bottom: 80px;
   left: 40px;
@@ -97,11 +72,11 @@
   font-weight: 500;
   letter-spacing: 2px;
   font-family: "Courier New", monospace;
-}
+} */
 
 /* bottom */
 
-.card-bottom {
+/* .card-bottom {
   position: absolute;
   bottom: 30px;
   left: 40px;
@@ -111,17 +86,18 @@
 .card-name {
   font-size: 15px;
   text-transform: uppercase;
+  color: white;
 }
 
 .card-exp {
   margin-top: 6px;
   font-size: 14px;
-}
+} */
 
 /* Add these styles for the Brain Tree card */
 .braintree-card {
   background: #202020; /* Dark background */
-  color: white;
+  /* color: white; */
   position: relative;
   overflow: hidden;
 }
@@ -176,7 +152,7 @@
   filter: brightness(0) invert(1); /* Makes logo white */
   opacity: 0.9;
 }
-
+/* 
 .card-number-full {
   position: absolute;
   bottom: 80px;
@@ -185,11 +161,10 @@
   font-weight: 500;
   letter-spacing: 2px;
   font-family: "Courier New", monospace;
-  color: white; /* White text */
+  color: white;
   z-index: 3;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
+} */
+/* 
 .cardholder-name {
   position: absolute;
   bottom: 55px;
@@ -197,7 +172,7 @@
   font-size: 16px;
   font-weight: 400;
   text-transform: uppercase;
-  color: white; /* White text */
+  color: white;
   z-index: 3;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
+} */

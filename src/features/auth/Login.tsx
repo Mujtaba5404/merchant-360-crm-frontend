@@ -1,58 +1,84 @@
-import { useNavigate } from "react-router-dom";
-import { Button, Paper, PasswordInput, SimpleGrid, Stack, Text, TextInput } from "@mantine/core";
+import {
+  Button,
+  Paper,
+  PasswordInput,
+  SimpleGrid,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
+import { useForm } from "@mantine/form";
+import { useLocalStorage } from "@mantine/hooks";
 import { IconAt, IconLock } from "@tabler/icons-react";
+import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../../api/auth";
 
 const Login = () => {
+  const [_, setAuth] = useLocalStorage({
+    key: "auth",
+    getInitialValueInEffect: false,
+  });
   const navigate = useNavigate();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const email = formData.get("email");
-    const password = formData.get("password");
+  const loginMutation = useLoginMutation();
 
-    if (email && password) {
-      // Save dummy auth
-      localStorage.setItem("auth", JSON.stringify({ name: "Mujtaba" }));
-      navigate("/dashboard"); // <-- now navigate works
-    }
+  const form = useForm({
+    initialValues: { email: "", password: "" },
+  });
+
+  const handleSubmit = (values) => {
+    loginMutation.mutate(values, {
+      onSuccess: ({ data }) => {
+        setAuth(data);
+        navigate(data.roleAndPermissions.indexPath || "/", { replace: true });
+      },
+    });
   };
 
   return (
     <SimpleGrid
-      cols={{ base: 1, sm: 2, lg: 3 }}
+      cols={{ base: 1, sm: 2, lg: 3, xl: 4 }}
       style={{ minHeight: "100vh", alignItems: "center" }}
-      p="lg"
+      p={"lg"}
       className="pattern-bg"
     >
-      <Paper p="lg" shadow="md">
-        <Stack gap={4} mb="md">
-          <Text fw={700} size="lg">Merchant 360</Text>
-          <Text fw={500} c="dimmed">Please login to your account</Text>
+      <Paper p={"lg"} shadow="md">
+        <Stack gap={4} mb={"md"}>
+          {/* <Logo w={225} /> */}
+          <Text fw={700}>Merchant 360</Text>
+          <Text fw={500} c={"dimmed"}>
+            Please login to your account
+          </Text>
         </Stack>
 
-        <Stack component="form" tt="capitalize" onSubmit={handleSubmit}>
+        <Stack
+          component={"form"}
+          onSubmit={form.onSubmit(handleSubmit)}
+          tt={"capitalize"}
+        >
           <TextInput
             type="email"
             required
             autoFocus
-            name="email"
             label="email address"
             placeholder="johndoe@example.com"
             leftSection={<IconAt size={18} />}
             leftSectionPointerEvents="none"
+            {...form.getInputProps("email")}
           />
 
           <PasswordInput
             required
-            name="password"
             label="password"
             placeholder="your password"
             leftSection={<IconLock size={18} />}
             leftSectionPointerEvents="none"
+            {...form.getInputProps("password")}
           />
 
-          <Button type="submit" mt="md">Login</Button>
+          <Button type="submit" mt={"md"} loading={loginMutation.isPending}>
+            Login
+          </Button>
         </Stack>
       </Paper>
     </SimpleGrid>

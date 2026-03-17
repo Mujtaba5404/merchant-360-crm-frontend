@@ -1,111 +1,62 @@
 import React from "react";
-import { Card } from "@mantine/core";
-import "../paymentCard.css";
+import { Card, Stack, Text, Group, Badge } from "@mantine/core";
 import CardChip from "./CardChip";
+import "../paymentCard.css";
 
-interface Props {
-  method: {
+interface CardProps {
+  card: {
     id: string;
     name: string;
   };
-  selected?: boolean;
-  onSelect?: (id: string) => void;
 }
 
-const RealStylePaymentCard: React.FC<Props> = ({ method, onSelect }) => {
-  const isStripe = method.id === "stripe";
-  const isAuthorize = method.id === "authorize_net";
-  const isBrainTree = method.id === "brain_tree";
+const PaymentCard: React.FC<CardProps> = ({ card }) => {
+  const isStripe = card.id === "stripe";
+  const isAuthorize = card.id === "authorize_net";
+  const isBrainTree = card.id === "brain_tree";
 
   return (
     <Card
+      radius="lg"
       className={`payment-card ${isStripe ? "stripe-card" : ""} ${
         isAuthorize ? "authorize-card" : ""
       } ${isBrainTree ? "braintree-card" : ""}`}
-      onClick={() => onSelect?.(method.id)}
-      padding={0}
-      radius="lg"
     >
+      <Stack justify="space-between">
+        {/* 🔹 LOGO */}
+        {isStripe && (
+          <Text fw={700} c="white">
+            STRIPE
+          </Text>
+        )}
 
-      {isStripe && (
-        <>
-          <div className="stripe-top" />
-          <div className="stripe-logo">stripe</div>
-        </>
-      )}
-
-      {isAuthorize && (
-        <>
-          <div className="auth-big-circle" />
-          <div className="auth-small-circle" />
-
+        {isAuthorize && (
           <img
             className="authorize-logo"
             src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Authorize.Net%2C_A_Visa_Solution_wordmark.svg"
           />
-        </>
-      )}
+        )}
 
-      {isBrainTree && (
-        <>
-          <div className="braintree-color-bar bar-1" />
-          <div className="braintree-color-bar bar-2" />
-          <div className="braintree-color-bar bar-3" />
-          <div className="braintree-color-bar bar-4" />
-          
-          <div className="braintree-table">
-            <table>
-              <tr>
-                <td>Category</td>
-                <td>Value (%)</td>
-              </tr>
-              {[...Array(125)].map((_, i) => (
-                <tr key={i}>
-                  <td>{i + 1}</td>
-                  <td>100</td>
-                </tr>
-              ))}
-            </table>
-          </div>
-           <img 
-            className="braintree-logo-image"
-            src="https://newsroom.ie.paypal-corp.com/image/braintree-logo_tn.png"
-            alt="Brain Tree"
-          />
-          <div className="card-number-full">**** **** **** 1234</div>
-          <div className="cardholder-name">Lee M. Cardholder</div>
-        </>
-      )}
+        {isBrainTree && (
+          <Text fw={700} c="white">
+            BRAINTREE
+          </Text>
+        )}
 
-      <div className="chip">
         <CardChip />
-      </div>
+        <Text c={"white"} size="xl" fw={700} lh={1}>
+          **** **** **** ****
+        </Text>
 
-      {isAuthorize && (
-        <div className="card-number">
-          **** **** **** 1234
-        </div>
-      )}
-
-      {isStripe && (
-        <div className="card-bottom">
-          <div className="card-name">Jane D. Rocket</div>
-
-          <div className="brand">
-            <span className="brand-icon">➤ </span>
-            ROCKET RIDES
-          </div>
-        </div>
-      )}
-
-      {isAuthorize && (
-        <div className="card-bottom">
-          <div className="card-name">John Smith</div>
-          <div className="card-exp">08 / 28</div>
-        </div>
-      )}
+        <Group justify="space-between">
+          <Text c={"white"} fw={600} tt={"capitalize"}>
+            John Doe
+          </Text>
+          <Badge color="teal">active</Badge>
+        </Group>
+      </Stack>
     </Card>
   );
 };
 
-export default RealStylePaymentCard;
+export default PaymentCard;

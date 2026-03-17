@@ -1,11 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "./features/auth/Login";
 import Authenticated from "./components/Authenticated";
+import Login from "./features/auth/Login";
+import Roles from "./features/roles/Roles";
+import Users from "./features/users/User";
 import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/Dashboard";
-import Users from "./pages/User";
-import Roles from "./pages/Role";
 import MerchantScreen from "./pages/MerchantScreen";
+import Transactions from "./pages/Transaction";
 
 const App: React.FC = () => {
   return (
@@ -19,17 +20,18 @@ const App: React.FC = () => {
 
           <Route path="users">
             <Route index element={<Users />} />
-            <Route path="users" element={<Users />} />
           </Route>
 
           <Route path="role">
             <Route index element={<Roles />} />
-            <Route path="role" element={<Roles />} />
           </Route>
 
           <Route path="merchant">
             <Route index element={<MerchantScreen />} />
-            <Route path="merchant" element={<MerchantScreen />} />
+          </Route>
+
+          <Route path="transactions">
+            <Route index element={<Transactions />} />
           </Route>
         </Route>
       </Route>
