@@ -38,7 +38,7 @@ const UserMenu = () => {
     <>
       <Menu width={200} position="bottom-end" shadow="md" withArrow>
         <Menu.Target>
-          <ActionIcon color="orange" size={"lg"}>
+          <ActionIcon size={"lg"}>
             <IconUserSquareRounded size={24} />
           </ActionIcon>
         </Menu.Target>

@@ -1,49 +1,33 @@
+import { Badge, Card, Group, Stack, Text } from "@mantine/core";
 import React from "react";
-import { Card, Stack, Text, Group, Badge } from "@mantine/core";
-import CardChip from "./CardChip";
+import chip from "../assets/chip.svg";
 import "../paymentCard.css";
 
 interface CardProps {
   card: {
     id: string;
     name: string;
+    logo?: string;
   };
 }
 
-const PaymentCard: React.FC<CardProps> = ({ card }) => {
-  const isStripe = card.id === "stripe";
-  const isAuthorize = card.id === "authorize_net";
-  const isBrainTree = card.id === "brain_tree";
+const MERCHANT_CLASSNAMES: any = {
+  stripe: "payment-card--stripe",
+  authorize_net: "payment-card--authorize",
+  brain_tree: "payment-card--braintree",
+};
 
+const PaymentCard: React.FC<CardProps> = ({ card }) => {
   return (
     <Card
       radius="lg"
-      className={`payment-card ${isStripe ? "stripe-card" : ""} ${
-        isAuthorize ? "authorize-card" : ""
-      } ${isBrainTree ? "braintree-card" : ""}`}
+      className={`payment-card ${MERCHANT_CLASSNAMES[card.id]}`}
     >
       <Stack justify="space-between">
-        {/* 🔹 LOGO */}
-        {isStripe && (
-          <Text fw={700} c="white">
-            STRIPE
-          </Text>
-        )}
+        <img src={card.logo} className="payment-card__logo" />
 
-        {isAuthorize && (
-          <img
-            className="authorize-logo"
-            src="https://upload.wikimedia.org/wikipedia/commons/1/1d/Authorize.Net%2C_A_Visa_Solution_wordmark.svg"
-          />
-        )}
+        <img src={chip} className="payment-card__chip" />
 
-        {isBrainTree && (
-          <Text fw={700} c="white">
-            BRAINTREE
-          </Text>
-        )}
-
-        <CardChip />
         <Text c={"white"} size="xl" fw={700} lh={1}>
           **** **** **** ****
         </Text>
@@ -52,6 +36,7 @@ const PaymentCard: React.FC<CardProps> = ({ card }) => {
           <Text c={"white"} fw={600} tt={"capitalize"}>
             John Doe
           </Text>
+
           <Badge color="teal">active</Badge>
         </Group>
       </Stack>

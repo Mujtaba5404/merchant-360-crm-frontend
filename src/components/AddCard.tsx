@@ -1,27 +1,53 @@
+import { Button, Modal, Select, Stack, Switch, TextInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
 import React from "react";
-import { Card, Center, Text } from "@mantine/core";
-import { IconPlus } from "@tabler/icons-react";
 
 interface Props {
-  onClick: () => void;
+  opened: boolean;
+  onClose: () => void;
 }
 
-const AddCard: React.FC<Props> = ({ onClick }) => {
+const AddCardModal: React.FC<Props> = ({ opened, onClose }) => {
+  const form = useForm({
+    initialValues: { title: "", type: "", isActive: true },
+  });
+
+  const handleSubmit = (values: {}) => {
+    console.log(values);
+  };
 
   return (
-    <Card
-      onClick={onClick}
-      className="add-card"
-      radius="xl"
-    >
-      <Center style={{ height: "100%" }}>
-        <div style={{ textAlign: "center" }}>
-          <IconPlus size={40} />
-          <Text mt={10}>Add Card</Text>
-        </div>
-      </Center>
-    </Card>
+    <Modal opened={opened} onClose={onClose} title="Add Card" centered>
+      <form onSubmit={form.onSubmit(handleSubmit)}>
+        <Stack>
+          <TextInput
+            label="Card title"
+            required
+            placeholder="Appmization's stripe"
+            {...form.getInputProps("title")}
+          />
+          <Select
+            label="Payment Type"
+            required
+            data={[
+              { value: "stripe", label: "Stripe" },
+              { value: "authorize_net", label: "Authorize.Net" },
+              { value: "brain_tree", label: "Brain Tree" },
+            ]}
+            {...form.getInputProps("type")}
+          />
+          <Switch
+            label="is active"
+            {...form.getInputProps("isActive", { type: "checkbox" })}
+          />
+
+          <Button type="submit" fullWidth mt={"md"}>
+            Add Card
+          </Button>
+        </Stack>
+      </form>
+    </Modal>
   );
 };
 
-export default AddCard;
+export default AddCardModal;

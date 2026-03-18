@@ -34,7 +34,6 @@ const DashboardTopbar: React.FC = () => {
               key={index}
               component={Link}
               to={link.path}
-              color="orange"
               variant={isActive ? "filled" : "subtle"}
               radius={"xl"}
             >

@@ -1,8 +1,4 @@
-import React from "react";
-
-const CardChip = () => {
-  return (
-    <svg
+ <svg
       width="48"
       height="34"
       viewBox="0 0 48 34"
@@ -18,7 +14,3 @@ const CardChip = () => {
       <rect x="20" y="18" width="12" height="10" rx="2" fill="#C9C9C9" />
       <rect x="34" y="18" width="8" height="10" rx="2" fill="#C9C9C9" />
     </svg>
-  );
-};
-
-export default CardChip;
