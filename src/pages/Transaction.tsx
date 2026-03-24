@@ -1,13 +1,14 @@
-import { Group, Title, Box } from "@mantine/core";
+import { useState } from "react";
+import TransactionsTable from "../features/transactions/TransactionTable";
+import StatsGridIcons from "../components/StatsGridIcons";
 
 const Transactions = () => {
+   const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
   return (
-    <Box p="md">
-      <Group justify="space-between" align="center" mb="xl">
-        <Title order={2}>Transactions</Title>
-      </Group>
-    </Box>
+    <>
+      <StatsGridIcons onSelectProvider={setSelectedProvider} />
+      <TransactionsTable selectedProvider={selectedProvider} />
+    </>
   );
 };
-
 export default Transactions;

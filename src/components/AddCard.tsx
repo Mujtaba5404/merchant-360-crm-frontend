@@ -1,13 +1,10 @@
 import { Button, Modal, Select, Stack, Switch, TextInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import React from "react";
+import { useGetAllMerchantsTypesQuery } from "../api/merchanttype";
 
-interface Props {
-  opened: boolean;
-  onClose: () => void;
-}
-
-const AddCardModal: React.FC<Props> = ({ opened, onClose }) => {
+const AddCardModal: React.FC<any> = ({ opened, onClose }) => {
+  const { data } = useGetAllMerchantsTypesQuery();
   const form = useForm({
     initialValues: { title: "", type: "", isActive: true },
   });
@@ -15,6 +12,13 @@ const AddCardModal: React.FC<Props> = ({ opened, onClose }) => {
   const handleSubmit = (values: {}) => {
     console.log(values);
   };
+
+  const paymentTypeOptions = data?.data
+    ? Object.entries(data.data).map(([key, value]) => ({
+        value: value,
+        label: key,
+      }))
+    : [];
 
   return (
     <Modal opened={opened} onClose={onClose} title="Add Card" centered>
@@ -29,11 +33,7 @@ const AddCardModal: React.FC<Props> = ({ opened, onClose }) => {
           <Select
             label="Payment Type"
             required
-            data={[
-              { value: "stripe", label: "Stripe" },
-              { value: "authorize_net", label: "Authorize.Net" },
-              { value: "brain_tree", label: "Brain Tree" },
-            ]}
+            data={paymentTypeOptions}
             {...form.getInputProps("type")}
           />
           <Switch
