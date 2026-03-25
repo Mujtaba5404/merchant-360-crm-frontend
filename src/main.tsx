@@ -10,6 +10,7 @@ import { BrowserRouter } from "react-router-dom";
 import MantineThemeOverride from "../mantine.config";
 import App from "./App";
 import "./index.css";
+import { Notifications } from "@mantine/notifications";
 
 const theme = createTheme(MantineThemeOverride);
 
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <MantineProvider theme={theme} defaultColorScheme="light">
+          <Notifications w={350} autoClose={5000} position="bottom-center" />
           <App />
         </MantineProvider>
       </BrowserRouter>

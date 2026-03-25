@@ -3,7 +3,12 @@ import { DataTable } from "mantine-datatable";
 import { useEffect, useState } from "react";
 import formatDate from "../../utils/formatDate";
 import formatAmount from "../../utils/formatAmount";
-import { useGetAllTransactionsQuery } from "../../api/transactions";
+import {
+  useGetAllTransactionsQuery,
+  useGetAuthorizeTransactionsQuery,
+  useGetBrainTreeTransactionsQuery,
+  useGetStripeTransactionsQuery,
+} from "../../api/transactions";
 
 const PAGE_SIZES = [10, 20, 30, 50];
 
@@ -49,11 +54,39 @@ const DEFAULT_COLUMNS = () => [
   },
 ];
 
-const TransactionsTable = ({ hideColumns = [] }) => {
+const TransactionsTable = ({ hideColumns = [], provider }) => {
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0]);
 
-  const { data, isLoading } = useGetAllTransactionsQuery();
+
+  const { data: allData, isLoading: allLoading } = useGetAllTransactionsQuery();
+
+ 
+  const { data: stripeData, isLoading: stripeLoading } =
+    useGetStripeTransactionsQuery();
+
+  const { data: authorizeData, isLoading: authorizeLoading } =
+    useGetAuthorizeTransactionsQuery();
+
+  const { data: braintreeData, isLoading: braintreeLoading } =
+    useGetBrainTreeTransactionsQuery();
+
+  let data;
+  let isLoading;
+
+  if (!provider) {
+    data = allData;
+    isLoading = allLoading;
+  } else if (provider === "stripe") {
+    data = stripeData;
+    isLoading = stripeLoading;
+  } else if (provider === "authorize") {
+    data = authorizeData;
+    isLoading = authorizeLoading;
+  } else if (provider === "braintree") {
+    data = braintreeData;
+    isLoading = braintreeLoading;
+  }
 
   const allRecords = data?.data || [];
 
@@ -63,11 +96,9 @@ const TransactionsTable = ({ hideColumns = [] }) => {
 
   useEffect(() => {
     setPage(1);
-  }, [pageSize]);
+  }, [pageSize, provider]);
 
-  if (isLoading) {
-    return <Loader />;
-  }
+  if (isLoading) return <Loader />;
 
   return (
     <DataTable

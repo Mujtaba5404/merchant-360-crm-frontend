@@ -1,7 +1,7 @@
 import { Stack } from "@mantine/core";
 import AddUserModalButton from "../features/users/AddUserModalButton";
 
-const Users: React.FC = () => {
+const User: React.FC = () => {
   return (
     <Stack gap="xl">
       <AddUserModalButton />
@@ -9,4 +9,4 @@ const Users: React.FC = () => {
   );
 };
 
-export default Users;
+export default User;

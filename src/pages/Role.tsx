@@ -1,7 +1,7 @@
 import { Stack } from "@mantine/core";
 import AddRoleModalButton from "../features/roles/AddRoleModalButton";
 
-const Roles = () => {
+const Role = () => {
   return (
     <Stack gap={"xl"}>
       <AddRoleModalButton />
@@ -9,4 +9,4 @@ const Roles = () => {
   );
 };
 
-export default Roles;
+export default Role;

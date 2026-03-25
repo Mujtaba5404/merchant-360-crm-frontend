@@ -4,6 +4,7 @@ import { useLocalStorage } from "@mantine/hooks";
 import { Link, useLocation } from "react-router-dom";
 import { navigationLinks } from "../config/navigationLinks";
 import UserMenu from "../components/UserMenu";
+import NotificationMenu from "../features/notification/NotificationMenu";
 
 interface Auth {
   name?: string;
@@ -25,7 +26,6 @@ const DashboardTopbar: React.FC = () => {
         LOGO
       </Text>
 
-      {/* Center Navigation */}
       <Group gap="md">
         {navigationLinks.map((link, index) => {
           const isActive = pathname.startsWith(link.path);
@@ -42,7 +42,12 @@ const DashboardTopbar: React.FC = () => {
           );
         })}
       </Group>
-      <UserMenu />
+
+      <Group gap="sm" align="center">
+        <Text tt="capitalize">👋 Hi, {auth?.name}!</Text>
+      <NotificationMenu />
+        <UserMenu />
+      </Group>
     </Group>
   );
 };
