@@ -9,6 +9,11 @@ export const navigationLinks = [
     path: "/transactions",
     resource: "transactions",
   },
+    {
+    title: "PaymentLinks",
+    path: "/payment",
+    resource: "payment",
+  },
   {
     title: "Users",
     path: "/users",

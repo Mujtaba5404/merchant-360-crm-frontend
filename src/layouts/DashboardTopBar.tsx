@@ -1,9 +1,9 @@
-import React from "react";
-import { Avatar, Group, Text, Button } from "@mantine/core";
+import { Button, Group, Text } from "@mantine/core";
 import { useLocalStorage } from "@mantine/hooks";
+import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { navigationLinks } from "../config/navigationLinks";
 import UserMenu from "../components/UserMenu";
+import { navigationLinks } from "../config/navigationLinks";
 import NotificationMenu from "../features/notification/NotificationMenu";
 
 interface Auth {

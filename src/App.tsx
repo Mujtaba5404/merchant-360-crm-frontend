@@ -7,6 +7,7 @@ import DashboardLayout from "./layouts/DashboardLayout";
 import Dashboard from "./pages/Dashboard";
 import MerchantScreen from "./pages/MerchantScreen";
 import Transactions from "./pages/Transaction";
+import Payment from "./pages/Payment";
 
 const App: React.FC = () => {
   return (
@@ -32,6 +33,10 @@ const App: React.FC = () => {
 
           <Route path="transactions">
             <Route index element={<Transactions />} />
+          </Route>
+
+          <Route path="payment">
+            <Route index element={<Payment/>} />
           </Route>
         </Route>
       </Route>
